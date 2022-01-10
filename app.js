@@ -34,14 +34,13 @@ yargs.command({
             type: 'string',
         },
         description: {
-            describe: 'Description fo command',
+            describe: 'Note desc',
             demandOption: true,
             type: 'string',
         }
     },
     handler: function(argv) {
-        console.log('Title to add command: ' + argv.title);
-        console.log('Function: ' + argv.description)
+        console.log('Title to add command: ' + argv.title)
     }
 })
 yargs.command({
