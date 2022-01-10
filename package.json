@@ -1,0 +1,23 @@
+{
+  "name": "course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svetlanagaydey/Node-exercises.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svetlanagaydey/Node-exercises/issues"
+  },
+  "homepage": "https://github.com/svetlanagaydey/Node-exercises#readme",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "validator": "^13.7.0"
+  }
+}
