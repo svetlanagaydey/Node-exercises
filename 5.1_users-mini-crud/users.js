@@ -23,7 +23,13 @@ const loadUsers = function () {
 
 const saveUsers = function (users) {
     const dataJSON = JSON.stringify(users)
-    fs.writeFileSync('users.json', dataJSON)
+    fs.w
+    riteFileSync('users.json', dataJSON)
+}
+function readUser(id) {
+    const usersList = loadUsers();
+    const currentUser = usersList.find((user) => {return user.id===id});
+    console.log('You looking for: ' + currentUser.name)
 }
 
 function addUser(id, name, email) {
@@ -47,23 +53,27 @@ function addUser(id, name, email) {
 
 function deleteUser(id) {
     const users = loadUsers();
-    const userToDelete = users.find((us) => {return us.id===id});
-    const index = users.indexOf(userToDelete);
-    if (index>=0) {
-        users.splice(index, 1);
-        const dataJSON = JSON.stringify(users)
-        fs.writeFileSync('users.json', dataJSON)
-    } else {
-        console.log("It is now user with id: " + id)
-    }
+    const updatedUsers = users.filter((user) => {
+        return user.id !== id
+    })
+    saveUsers(updatedUsers);
+    // const userToDelete = users.find((us) => {return us.id===id});
+    // const index = users.indexOf(userToDelete);
+    // if (index>=0) {
+    //     users.splice(index, 1);
+    //     const dataJSON = JSON.stringify(users)
+    //     fs.writeFileSync('users.json', dataJSON)
+    // } else {
+    //     console.log("It is now user with id: " + id)
+    // }
 }
-function readUser(id) {
-    const usersList = loadUsers();
-    const currentUser = usersList.find((user) => {return user.id===id});
-    console.log('You looking for: ' + currentUser.name)
+const updateUser = (argv) => {
+    //const users = loadUsers()
+    return console.log('updated with new name ' + argv.newName )
 }
 module.exports = {
     addUser: addUser,
     deleteUser: deleteUser,
     readUser: readUser,
+    updateUser: updateUser,
 }

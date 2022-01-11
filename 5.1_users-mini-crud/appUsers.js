@@ -55,5 +55,26 @@ yargs.command({
         users.readUser(argv.id)
     }
 })
+yargs.command({
+    command: 'update',
+    describe: 'Find a user',
+    builder: {
+        id: {
+            describe: 'Unic user Id',
+            demandOption: true,
+        },
+        newName: {
+            describe: 'Updated name',
+            demandOption: false,
+        },
+        newEmail: {
+            describe: 'Updated email',
+            demandOption: false,
+        }
+    },
+    handler(argv) {
+        users.updateUser(argv)
+    }
+})
 
 yargs.parse();
