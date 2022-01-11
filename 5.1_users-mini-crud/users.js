@@ -69,6 +69,7 @@ function deleteUser(id) {
 }
 const updateUser = (argv) => {
     //const users = loadUsers()
+    debugger
     return console.log('updated with new name ' + argv.newName )
 }
 module.exports = {
