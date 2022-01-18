@@ -15,29 +15,33 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     const db = client.db(databaseName);
     
 
-    db.collection('users').insertOne({
-        _id: id,
-        name: 'Monika',
-        age: 22
-    }, (error, result) => {
-        if (error) {
-            return console.log('Unable to insert user')
-        }
-        console.log(result.ops)
-    });
+    // db.collection('users').insertOne({
+    //     //_id: id,
+    //     name: 'Monika',
+    //     email: 'test11@test.com',
+    //     posts: []
+    // }, (error, result) => {
+    //     if (error) {
+    //         return console.log('Unable to insert user')
+    //     }
+    //     console.log(result.ops)
+    // });
 
     // db.collection('users').insertMany([
     //     {
     //         name: 'Roy',
-    //         email: 'test1@test.com'
+    //         email: 'test1@test.com',
+    //         posts: []
     //     },
     //     {
     //         name: 'Alex',
-    //         email: 'test2@test.com'
+    //         email: 'test2@test.com',
+    //         posts: []
     //     },
     //     {
     //         name: 'Ann',
-    //         email: 'test3@test.com'
+    //         email: 'test3@test.com',
+    //         posts: []
     //     }
     // ], (error, result) => {
     //     if (error) {
@@ -52,7 +56,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
             text: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem',
             author: {
                 "$ref": "users",
-                "$id": ObjectId("61e6b3b97b490c89dd26ca02")
+                "$id": ObjectId("61e71961941dd2fe8a1d6ce9")
             },
             comments: []
         },
@@ -61,7 +65,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
             text: 'Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem',
             author: {
                 "$ref": "users",
-                "$id": ObjectId("61e6b3b97b490c89dd26ca03")
+                "$id": ObjectId("61e71961941dd2fe8a1d6ce9")
             },
             comments: []
         }
