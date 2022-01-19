@@ -60,6 +60,7 @@ app.post('/products', async(req, res) => {
         res.status(400).send(e)
     }
 })
+
 app.patch('/products/:id', async (req, res) => {
     const updates = Object.keys(req.body);
     const allawedUpdates = ['name', 'category', 'isActive', 'details.description', 'details.price', 'details.discount', 'details.images', 'details.phone'];
@@ -76,6 +77,27 @@ app.patch('/products/:id', async (req, res) => {
         res.send(product);   
     } catch(e) {
      res.status(400).send(e)
+    }
+})
+
+app.delete('/products/:id', async(req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+        if(!product) {
+            return res.status(404).send();
+        }
+        res.send(product);
+    } catch(e) {
+        res.status(500).send();
+    }
+})
+
+app.delete('/products', async(req, res) => {
+    try {
+        const products = await Product.deleteMany({})
+        res.send(products);
+    } catch(e) {
+        res.status(500).send();
     }
 })
 
