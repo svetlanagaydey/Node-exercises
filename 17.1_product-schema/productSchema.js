@@ -9,7 +9,13 @@ const detailsSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 1,
+    validate(value) {
+      if(value < 0) {
+        throw new Error ("Price can't be negative")
+        //console.log("Price can't be negative")
+      }
+    }
+   // min: 1,
   },
   discount: {
     type: Number,

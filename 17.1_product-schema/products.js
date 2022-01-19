@@ -17,7 +17,7 @@ const products = [
         isActive: true,
         details: {
           description: "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ",
-          price: 18,
+          price: -2,
           discount: 20,
           images: ["img1", "img2", "img3"],
           phone: 55555555,
