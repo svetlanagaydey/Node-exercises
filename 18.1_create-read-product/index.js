@@ -13,9 +13,20 @@ app.get('/products', (req, res) => {
     Product.find({}).then((products) => {
         res.send(products);
     }).catch((e) => {
-        res.status(400).send(e)
+        res.status(500).send()
     })
 })
+
+app.get('/products/:id'), (req, res) => {
+    const _id = req.params.id;
+    Product.findById(_id).then((product) => {
+        if(!product) {
+            return res.status(404).send();
+        }
+        res.status(200).send(product);
+    }).catch((e) => res.status(500).send());
+  
+}
 
 app.post('/products', (req, res) => {
     const product = new Product(req.body)
