@@ -17,16 +17,25 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.get('/products/:id'), (req, res) => {
+app.get('/products/:id', (req, res) => {
     const _id = req.params.id;
     Product.findById(_id).then((product) => {
         if(!product) {
             return res.status(404).send();
         }
-        res.status(200).send(product);
-    }).catch((e) => res.status(500).send());
-  
-}
+        res.json(product);
+    }).catch((e) => {
+        res.status(500).send()
+    });
+})
+
+app.get('/actives', (req, res) => {
+    Product.find({isActive: false}).then((products) => {
+        res.send(products);
+    }).catch((e) => {
+        res.status(500).send()
+    })
+})
 
 app.post('/products', (req, res) => {
     const product = new Product(req.body)
