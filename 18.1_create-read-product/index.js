@@ -37,6 +37,22 @@ app.get('/actives', (req, res) => {
     })
 })
 
+app.get('/actives', (req, res) => {
+    Product.find({isActive: false}).then((products) => {
+        res.send(products);
+    }).catch((e) => {
+        res.status(500).send()
+    })
+})
+
+app.get('/products_price_range', (req, res) => {
+    Product.find({"details.price": {$lt: 100, $gt: 10}}).then((products) => {
+        res.send(products);
+    }).catch((e) => {
+        res.status(500).send()
+    })
+})
+
 app.post('/products', (req, res) => {
     const product = new Product(req.body)
     product.save().then(() => {
