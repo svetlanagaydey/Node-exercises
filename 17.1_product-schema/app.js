@@ -4,6 +4,7 @@ const products = require("./products.js")
 
 connect(
   "mongodb://localhost/e-commerce",
+  //'mongodb://127.0.0.1:27017/e-commerce'
   () => {
     console.log("mongoDB connected");
   },
