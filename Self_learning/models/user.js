@@ -48,6 +48,16 @@ const userSchema = new mongoose.Schema({
         }
     }]
 })
+//function to hide tokens and password in user side
+userSchema.methods.toJSON = function () {
+    const user = this
+    const userObject = user.toObject();
+
+    delete userObject.password;
+    delete userObject.tokens;
+
+    return userObject;
+}
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this

@@ -3,11 +3,10 @@ const User = require('../models/user');
 
 const auth = async(req, res, next) => {
   try {
-    //console.log("auth middleware")
     const token = req.header('Authorization').replace('Bearer ', '');
-    console.log(token);
+    
     const decoded = jwt.verify(token, 'mysecretfortoken');
-    const user = await User.findOne({_id: decoded._id, "token": token});
+    const user = await User.findOne({_id: decoded._id, "tokens.token": token});
 
     if (!user) {
         throw new Error();
