@@ -29,14 +29,38 @@ router.get('/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
 
-router.get('/users', auth, async (req, res) => {
+// router.get('/users', auth, async (req, res) => {
+//     try {
+//         const users = await User.find();
+//         res.send(users);
+//     }catch(e) {
+//         res.status(501).send({error: 5-1})
+//     }
+//     res.send(req.user)
+// })
+
+router.post('/users/logout', auth, async (req, res) => {
     try {
-        const users = await User.find();
-        res.send(users);
-    }catch(e) {
-        res.status(501).send({error: 5-1})
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token !== req.token
+        })
+        await req.user.save()
+
+        res.send()
+    } catch (e) {
+        res.status(500).send()
     }
-    res.send(req.user)
 })
+
+router.post('/users/logoutAll', auth, async (req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 
 module.exports = router
