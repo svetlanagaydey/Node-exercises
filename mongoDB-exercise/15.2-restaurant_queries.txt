@@ -1,0 +1,55 @@
+1. Crud
+    1.1 – Write a MongoDb query to display all the documents in the restaurant collection.
+        db.FindMyRestaurant.find()
+    1.2 - Write a MongoDb query to display all restaurants that have a specific cuisine
+        db.restaurant.find({cuisine: "Milk"})
+    1.3 - Write a MongoDb query that displays only kosher restaurants
+        db.restaurant.find({kosher: true})
+    1.4 - Write a MongoDb query that displays only a specific cities restaurants
+        db.restaurant.find({"address.city" :"Tel-Aviv"});
+    1.5 - Write a MongoDb query to display a specific restaurants address  
+        //addresses Kosher restaurants
+        db.restaurant.find({"kosher" :true}, {_id:0, "address.city":1, "address.street":1});
+    1.6 - Write a MongoDb query to display a specific restaurants coordinates
+        //Milk restaurants coordinates
+        db.restaurant.find({"cuisine" :"Milk"}, {_id:0, "address.coordinates":1});
+    1.7. - Write a MongoDb query that should display all restaurants in ascending order by restaurant name.
+        db.restaurant.find().sort({name: 1})
+    1.8 - Write a MongoDb query that should display all restaurants in ascending order by city names.
+        db.restaurant.find().sort({"address.city": 1})
+    1.9 - Update a specific restaurant's name
+        db.restaurant.updateOne({name: "Tasty"}, {$set: {name:"Taaaasty"}})
+    1.10 - Update a specific restaurant by adding a new review.
+        db.restaurant.updateOne({name: "Taaaasty"}, {$push: {review: {date: "03:03:2020", score: 33}}})
+    1.11 - Update all restaurants to be kosher
+        db.restaurant.updateMany({ }, {$set: {"kosher": false}})
+    1.12 - Delete a specific restaurant
+        db.restaurant.deleteOne({name: "Srulik" })
+    1.13 - Delete all restaurants
+        db.restaurant.deleteMany({})
+
+2. forEach Queries
+use the forEach cursor method to query the following:
+    2.1 - Write a MongoDb query to print all restaurant names.
+        db.restaurant.find().forEach(function(myDoc) {print("Restaurant name: " + myDoc.name)})
+    2.2 - Write a MongoDb query to print all restaurant cities
+        db.restaurant.find().forEach(function(myDoc) {print("Restaurant city: " + myDoc.address.city)})  
+    2.3 - Write a MongoDb query to print all restaurant coordinates
+        db.restaurant.find().forEach(function(myDoc) {print("Restaurant coordinates: att - " + myDoc.address.coordinates[0] + ", lon - " + myDoc.address.coordinates[1])})
+
+3. Advanced Queries
+
+    3.1 - Query for restaurant names that start with a specific alphabet
+        db.restaurant.find({name: /^Ta/});
+        db.restaurant.find({name: /^Ta/},{"name":1});
+    3.2 - Query how many documents you have from the restaurant collection.
+        db.restaurant.countDocuments()
+    3.3 - Write a MongoDb query to get restaurants that include reviews from a specific date.
+        db.restaurant.find({"review.date" :"02:02:2020"});
+
+4. Aggregation operations
+use the aggregation framework to query the following:
+    4.1 - Write a mongoDb query to display all restaurants average score.
+        db.restaurant.aggregate({$group: { _id: "review.score", avg: { $avg: "$review.score" } } });
+    4.2 - Write a mongoDb query to display a specific restaurant average score
+        db.restaurant.find({"name": "Taaaasty"}, {"Particular Reastaurant Avg": {$avg: "$review.score"}})
